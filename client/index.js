@@ -8,9 +8,16 @@ document.querySelector('#time-form').addEventListener('submit', function(e){
 
     const trajectory = document.querySelector("#trajectory-input").value
     const dailyStartTime = document.querySelector("#daily-start-time").value
+    const trajectoryTime = document.querySelector("#trajectory-time").value
 
     const dateDifferentialInMilliseconds = randomizeEndingDateTime - new Date()
 
+    const requestObject = {
+      dateDifferentialInMilliseconds, 
+      trajectory, 
+      dailyStartTime,
+      trajectoryTime
+    }
     // (async () => {
     //     const rawResponse = await fetch('/random', {
     //       method: 'POST',
@@ -32,9 +39,11 @@ document.querySelector('#time-form').addEventListener('submit', function(e){
         },
       
         //make sure to serialize your JSON body
-        body: JSON.stringify({dateDifferentialInMilliseconds: dateDifferentialInMilliseconds, trajectory: trajectory, dailyStartTime: dailyStartTime})
+        body: JSON.stringify(requestObject)
       })
-      .then( (response) => { 
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
          //do something awesome that makes the world a better place
       });
 });

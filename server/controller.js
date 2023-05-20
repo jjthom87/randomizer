@@ -7,7 +7,7 @@ module.exports = (app) => {
     });
     
     app.post("/random", function(req,res){
-        console.log(req.body)
+        res.json(req.body)
     });
 
 }
