@@ -4,23 +4,36 @@
     </head>
     <body>
         <h1>Welcome to the Randomizer</h1>
-        <form id="time-form">
-            <label for="date-end">Date & Time End</label><br>
-            <input id="date-input" type="date"><input id="time-input" type="time"><br>
-            <label for="trajectory">Trajectory</label><br>
-            <input id="trajectory-input" type="number"> Times a 
-            <select name="" id="trajectory-time">
-                <option value="minute">Minute</option>
-                <option value="hour">Hour</option>
-                <option value="day">Day</option>
-                <option value="month">Month</option>
-                <option value="year">Year</option>
+        <div id="single-randomizer">
+            <h2>One Time Randomizer</h2>
+            <select name="" id="input-mode">
+                <option value="" selected disabled>Pick an Option</option>
+                <option class="input-mode-value" value="comma-separated-list">Comma Separated List</option>
+                <option class="input-mode-value" value="csv-file">Import CSV File</option>
+                <option class="input-mode-value" value="one-by-one">One By One List</option>
             </select>
-             starting at 
-             <input type="time" id="daily-start-time">
-            <br>
-            <input type="submit" value="Submit">
-        </form>
+        </div>
+        <div id="scheduled-randomizer">
+            <h2>Schedule Randomizer</h2>
+            <form id="time-form">
+                <label for="date-end">Date & Time End</label><br>
+                <input id="date-input" type="date"><input id="time-input" type="time"><br>
+                <label for="trajectory">Trajectory</label><br>
+                <input id="trajectory-input" type="number"> Times a 
+                <select name="" id="trajectory-time">
+                    <option value="minute">Minute</option>
+                    <option value="hour">Hour</option>
+                    <option value="day">Day</option>
+                    <option value="month">Month</option>
+                    <option value="year">Year</option>
+                </select>
+                 starting at 
+                 <input type="time" id="daily-start-time">
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </body>
     <script src="./index.js"></script>
+    <script src="./single-randomize.js"></script>
 </html>
