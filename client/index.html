@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Randomizer</title>
+        <link rel="stylesheet" href="./index.css">
     </head>
     <body>
         <h1>Welcome to the Randomizer</h1>
@@ -33,7 +34,16 @@
                 <input type="submit" value="Submit">
             </form>
         </div>
+        <div id="set-randomized-list-title-modal" class="modal">
+            <div id="set-randomized-list-title-modal-content">
+                <span id="close-set-randomized-list-title-modal">&times;</span>
+                <h3>Randomized List Name</h3>
+                <input type="text" id="set-randomized-list-title-input">
+                <button id="save-randomized-list-title">Save</button>
+            </div>
+        </div>
     </body>
     <script src="./index.js"></script>
     <script src="./single-randomize.js"></script>
+    <script src="./set-randomized-list-title-modal.js"></script>
 </html>

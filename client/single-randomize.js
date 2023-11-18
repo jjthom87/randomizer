@@ -2,17 +2,26 @@ let inputStart = 1;
 let howManyTimesSubmitHit = 0;
 let submitButtonHit = false;
 let oneByOneOptions = [];
-let savedOptions = [];
-
+let savedLists = [];
 
 const createOneByOneHeader = () => {
     let html = "<h3>Create Your List to Randomize</h3>";
     html += "<div id='inputs-div'><span class='input-spans' id='one-by-one-span-1'><input id='input-1' type='text'><button class='add-input-button' id='plus-minus-button-1'>+</button></span><br></div>"
-    const div = document.createElement('div');
-    div.setAttribute("id", "one-by-one-div");
-    div.innerHTML = html
-
-    document.querySelector("#single-randomizer").appendChild(div)
+    if(document.querySelector("#one-by-one-div") != null){
+        inputStart = 1;
+        howManyTimesSubmitHit = 0;
+        oneByOneOptions = [];
+        if(document.querySelector("#randomize-p") != null){
+            document.querySelector("#randomize-p").textContent = ""
+        }
+        document.querySelector("#one-by-one-div").innerHTML = html;
+    } else {
+        const div = document.createElement('div');
+        div.setAttribute("id", "one-by-one-div");
+        div.innerHTML = html
+    
+        document.querySelector("#single-randomizer").appendChild(div)    
+    }
 }
 
 const createOneByOneRandomizeButton = () => {
@@ -20,7 +29,13 @@ const createOneByOneRandomizeButton = () => {
     submitButton.setAttribute("id", "randomize-inputs-list-button");
     submitButton.textContent = "Randomize List";
 
+    let saveRandomizedListButton = document.createElement("button");
+    saveRandomizedListButton.setAttribute("id", "save-randomized-list-button");
+    saveRandomizedListButton.textContent = "Save Randomized List";
+
     document.querySelector("#single-randomizer").appendChild(submitButton)
+    document.querySelector("#single-randomizer").appendChild(saveRandomizedListButton);
+    document.querySelector("#single-randomizer").appendChild(document.createElement("br"))
 }
 
 const oneByOnePlusButtonClicked = () => {
@@ -76,24 +91,92 @@ const oneByOneRandomizeInputsButtonClicked = () => {
     }
 
     let randomItem = oneByOneOptions[Math.floor(Math.random() * oneByOneOptions.length)]
-    let p = document.createElement("p");
-    p.setAttribute("id", "randomize-p")
-    p.textContent = randomItem;
 
-    document.querySelector("#single-randomizer").appendChild(p)
+    if(document.querySelector("#single-randomizer") == null){
+        let p = document.createElement("p");
+        p.setAttribute("id", "randomize-p")
+        p.textContent = randomItem;
+        document.querySelector("#single-randomizer").appendChild(p)
+    } else {
+        document.querySelector("#randomize-p").textContent = randomItem;
+    }
+}
+
+const oneByOneSaveRandomizedListButtonClicked = () => {
+    let previousInputValue = document.querySelector(`#input-${inputStart}`).value;
+    oneByOneOptions.push(previousInputValue)
+
+    const randomizedListTitle = document.querySelector("#set-randomized-list-title-input").value;
+
+    const randomizedItem = {
+        title: randomizedListTitle,
+        list: oneByOneOptions
+    }
+    savedLists.push(randomizedItem)
+
+    if(document.querySelector("#saved-randomizers") == null){
+        const savedRandomItemsDiv = document.createElement("div");
+        savedRandomItemsDiv.setAttribute("id", "saved-randomizers");
+        savedRandomItemsDiv.style.display = "inline-block";
+        document.querySelector("#single-randomizer").appendChild(savedRandomItemsDiv);
+    }
+
+    const newSavedRandomizedList = document.createElement("div");
+    newSavedRandomizedList.style.backgroundColor = "grey";
+    newSavedRandomizedList.style.width = "fit-content";
+    newSavedRandomizedList.style.paddingTop = "0px";
+    newSavedRandomizedList.style.paddingRight = "5px";
+    newSavedRandomizedList.style.paddingBottom = "3px";
+    newSavedRandomizedList.style.paddingLeft = "5px";
+    newSavedRandomizedList.style.margin = "5px";
+    newSavedRandomizedList.setAttribute("id", randomizedListTitle.split(' ').join('-').toLowerCase() + "-list-section")
+    newSavedRandomizedList.innerHTML = "<h3>"+randomizedListTitle+"</h3><button class='saved-randomized-button' id='randomize-"+randomizedListTitle.split(' ').join('-').toLowerCase()+"-list-button'>Randomize</button>";
+    document.querySelector("#saved-randomizers").appendChild(newSavedRandomizedList);
+
+    document.querySelector("#set-randomized-list-title-input").value = "";
+    createOneByOneHeader();
+}
+
+const oneByOneSavedRandomizedButtonClicked = (e) => {
+    const selectedList = savedLists.find((savedList) => {
+        return e.target.id.includes(savedList.title.split(' ').join('-').toLowerCase())
+    })
+    let randomP;
+    if(document.querySelector("#" + selectedList.title.split(' ').join('-').toLowerCase() + "-list-random-item") != null){
+        document.querySelector("#" + selectedList.title.split(' ').join('-').toLowerCase() + "-list-random-item").innerHTML = "";
+        randomP = document.querySelector("#" + selectedList.title.split(' ').join('-').toLowerCase() + "-list-random-item");
+    } else {
+        randomP = document.createElement("p");
+        randomP.setAttribute("id", selectedList.title.split(' ').join('-').toLowerCase() + "-list-random-item");
+    }
+    randomP.textContent = selectedList.list[Math.floor(Math.random() * selectedList.list.length)];
+    document.querySelector("#" + selectedList.title.split(' ').join('-').toLowerCase() + "-list-section").appendChild(randomP);
 }
 
 const oneByOneClickEvents = (e) => {
-    if(e.target.className == "add-input-button"){
-        if(e.target.textContent == "+"){
-            oneByOnePlusButtonClicked()
-        } else if (e.target.textContent == "-"){
-            oneByOneMinusButtonClicked()
-        }
+    switch(e.target.className){
+        case "add-input-button":
+            switch(e.target.textContent){
+                case "+":
+                    oneByOnePlusButtonClicked();
+                    break;
+                case "-":
+                    oneByOneMinusButtonClicked();
+                    break;
+            }
+            break;
+        case "saved-randomized-button":
+            oneByOneSavedRandomizedButtonClicked(e);
+            break;
     }
 
-    if(e.target.id == "randomize-inputs-list-button"){
-        oneByOneRandomizeInputsButtonClicked()
+    switch(e.target.id){
+        case "randomize-inputs-list-button":
+            oneByOneRandomizeInputsButtonClicked();
+            break;
+        case "save-randomized-list-title":
+            oneByOneSaveRandomizedListButtonClicked();
+            break;
     }
 }
 
@@ -107,11 +190,7 @@ document.querySelector("body").addEventListener("click", function(e){
 })
 
 document.querySelector("#input-mode").addEventListener("change", function(e){
-    switch(e.target.value){
-        case "one-by-one":
-            runOneByOne();
-            break;
-        default:
-            console.log("ya beat")
+    if(e.target.value == "one-by-one"){
+        runOneByOne();
     }
 })
