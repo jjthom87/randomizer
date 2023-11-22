@@ -117,20 +117,22 @@ const oneByOneSaveRandomizedListButtonClicked = () => {
     if(document.querySelector("#saved-randomizers") == null){
         const savedRandomItemsDiv = document.createElement("div");
         savedRandomItemsDiv.setAttribute("id", "saved-randomizers");
-        savedRandomItemsDiv.style.display = "inline-block";
+        savedRandomItemsDiv.style.display = "flex";
         document.querySelector("#single-randomizer").appendChild(savedRandomItemsDiv);
     }
 
-    const newSavedRandomizedList = document.createElement("div");
-    newSavedRandomizedList.style.backgroundColor = "grey";
-    newSavedRandomizedList.style.width = "fit-content";
-    newSavedRandomizedList.style.paddingTop = "0px";
-    newSavedRandomizedList.style.paddingRight = "5px";
-    newSavedRandomizedList.style.paddingBottom = "3px";
-    newSavedRandomizedList.style.paddingLeft = "5px";
-    newSavedRandomizedList.style.margin = "5px";
-    newSavedRandomizedList.setAttribute("id", randomizedListTitle.split(' ').join('-').toLowerCase() + "-list-section")
-    newSavedRandomizedList.innerHTML = "<h3>"+randomizedListTitle+"</h3><button class='saved-randomized-button' id='randomize-"+randomizedListTitle.split(' ').join('-').toLowerCase()+"-list-button'>Randomize</button>";
+    const newSavedRandomizedList = document.createElement("span");
+    const div = document.createElement("div");
+    div.style.backgroundColor = "grey";
+    div.style.width = "fit-content";
+    div.style.paddingTop = "0px";
+    div.style.paddingRight = "5px";
+    div.style.paddingBottom = "3px";
+    div.style.paddingLeft = "5px";
+    div.style.margin = "5px";
+    div.setAttribute("id", randomizedListTitle.split(' ').join('-').toLowerCase() + "-list-section")
+    div.innerHTML = "<h3>"+randomizedListTitle+"</h3><button class='saved-randomized-button' id='randomize-"+randomizedListTitle.split(' ').join('-').toLowerCase()+"-list-button'>Randomize</button>";
+    newSavedRandomizedList.appendChild(div);
     document.querySelector("#saved-randomizers").appendChild(newSavedRandomizedList);
 
     document.querySelector("#set-randomized-list-title-input").value = "";
