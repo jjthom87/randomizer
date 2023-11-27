@@ -92,7 +92,7 @@ const oneByOneRandomizeInputsButtonClicked = () => {
 
     let randomItem = oneByOneOptions[Math.floor(Math.random() * oneByOneOptions.length)]
 
-    if(document.querySelector("#single-randomizer") == null){
+    if(document.querySelector("#randomize-p") == null){
         let p = document.createElement("p");
         p.setAttribute("id", "randomize-p")
         p.textContent = randomItem;
