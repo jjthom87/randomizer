@@ -6,7 +6,7 @@ let savedLists = [];
 
 const createOneByOneHeader = () => {
     let html = "<h3>Create Your List to Randomize</h3>";
-    html += "<div id='inputs-div'><span class='input-spans' id='one-by-one-span-1'><input id='input-1' type='text'><button class='add-input-button' id='plus-minus-button-1'>+</button></span><br></div>"
+    html += "<div id='inputs-div' style='display: grid'><span class='input-spans' id='one-by-one-span-1'><input id='input-1' type='text'><button class='add-input-button' id='plus-minus-button-1'>+</button></span></div>"
     if(document.querySelector("#one-by-one-div") != null){
         inputStart = 1;
         howManyTimesSubmitHit = 0;
@@ -20,8 +20,9 @@ const createOneByOneHeader = () => {
         div.setAttribute("id", "one-by-one-div");
         div.innerHTML = html
     
-        document.querySelector("#single-randomizer").appendChild(div)    
+        document.querySelector("#single-randomizer").appendChild(div)
     }
+    document.querySelector("#single-randomizer").innerHTML = document.querySelector("#single-randomizer").innerHTML + "</br>"
 }
 
 const createOneByOneRandomizeButton = () => {
@@ -35,7 +36,7 @@ const createOneByOneRandomizeButton = () => {
 
     document.querySelector("#single-randomizer").appendChild(submitButton)
     document.querySelector("#single-randomizer").appendChild(saveRandomizedListButton);
-    document.querySelector("#single-randomizer").appendChild(document.createElement("br"))
+    document.querySelector("#single-randomizer").innerHTML = document.querySelector("#single-randomizer").innerHTML + "<br></br>"
 }
 
 const oneByOnePlusButtonClicked = () => {
@@ -53,7 +54,7 @@ const oneByOnePlusButtonClicked = () => {
         document.querySelector(`#plus-minus-button-${inputStart}`).innerHTML = "-"
         
         inputStart++
-        let html = "<input id='input-"+inputStart+"' type='text'><button class='add-input-button' id=plus-minus-button-"+inputStart+">+</button><br>"
+        let html = "<input id='input-"+inputStart+"' type='text'><button class='add-input-button' id=plus-minus-button-"+inputStart+">+</button>"
         let span = document.createElement("span")
         span.setAttribute("id", "one-by-one-span-" + inputStart);
         span.setAttribute("class", "input-spans")
@@ -92,7 +93,7 @@ const oneByOneRandomizeInputsButtonClicked = () => {
 
     let randomItem = oneByOneOptions[Math.floor(Math.random() * oneByOneOptions.length)]
 
-    if(document.querySelector("#single-randomizer") == null){
+    if(document.querySelector("#randomize-p") == null){
         let p = document.createElement("p");
         p.setAttribute("id", "randomize-p")
         p.textContent = randomItem;
