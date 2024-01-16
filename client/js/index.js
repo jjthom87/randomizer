@@ -18,19 +18,7 @@ document.querySelector('#time-form').addEventListener('submit', function(e){
       dailyStartTime,
       trajectoryTime
     }
-    // (async () => {
-    //     const rawResponse = await fetch('/random', {
-    //       method: 'POST',
-    //       headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify({dateDifferentialInMilliseconds: dateDifferentialInMilliseconds, trajectory: trajectory, dailyStartTime: dailyStartTime})
-    //     });
-    //     const content = await rawResponse.json();
-      
-    //     console.log(content);
-    // })();
+
     fetch("/random", {
         method: "post",
         headers: {
