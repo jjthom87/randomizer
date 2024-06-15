@@ -20,7 +20,7 @@ const createOneByOneHeader = () => {
         div.setAttribute("id", "one-by-one-div");
         div.innerHTML = html
     
-        document.querySelector("#single-randomizer").appendChild(div)    
+        document.querySelector("#randomizer-div").appendChild(div)    
     }
 }
 
@@ -33,9 +33,9 @@ const createOneByOneRandomizeButton = () => {
     saveRandomizedListButton.setAttribute("id", "save-randomized-list-button");
     saveRandomizedListButton.textContent = "Save Randomized List";
 
-    document.querySelector("#single-randomizer").appendChild(submitButton)
-    document.querySelector("#single-randomizer").appendChild(saveRandomizedListButton);
-    document.querySelector("#single-randomizer").appendChild(document.createElement("br"))
+    document.querySelector("#randomizer-div").appendChild(submitButton)
+    document.querySelector("#randomizer-div").appendChild(saveRandomizedListButton);
+    document.querySelector("#randomizer-div").appendChild(document.createElement("br"))
 }
 
 const oneByOnePlusButtonClicked = () => {
@@ -87,7 +87,7 @@ const oneByOneRandomizeInputsButtonClicked = () => {
 
     let randomizeP = document.querySelector("#randomize-p");
     if(randomizeP != null){
-        document.querySelector("#single-randomizer").removeChild(randomizeP)
+        document.querySelector("#randomizer-div").removeChild(randomizeP)
     }
 
     let randomItem = oneByOneOptions[Math.floor(Math.random() * oneByOneOptions.length)]
@@ -96,7 +96,7 @@ const oneByOneRandomizeInputsButtonClicked = () => {
         let p = document.createElement("p");
         p.setAttribute("id", "randomize-p")
         p.textContent = randomItem;
-        document.querySelector("#single-randomizer").appendChild(p)
+        document.querySelector("#randomizer-div").appendChild(p)
     } else {
         document.querySelector("#randomize-p").textContent = randomItem;
     }
@@ -118,7 +118,7 @@ const oneByOneSaveRandomizedListButtonClicked = () => {
         const savedRandomItemsDiv = document.createElement("div");
         savedRandomItemsDiv.setAttribute("id", "saved-randomizers");
         savedRandomItemsDiv.style.display = "flex";
-        document.querySelector("#single-randomizer").appendChild(savedRandomItemsDiv);
+        document.querySelector("#randomizer-div").appendChild(savedRandomItemsDiv);
     }
 
     const newSavedRandomizedList = document.createElement("span");
@@ -193,6 +193,7 @@ document.querySelector("body").addEventListener("click", function(e){
 
 document.querySelector("#input-mode").addEventListener("change", function(e){
     if(e.target.value == "one-by-one"){
+        document.querySelector("#randomizer-div").innerHTML = "";
         runOneByOne();
     }
 })
