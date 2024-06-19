@@ -28,10 +28,12 @@ const createOneByOneRandomizeButton = () => {
     let submitButton = document.createElement("button");
     submitButton.setAttribute("id", "randomize-inputs-list-button");
     submitButton.textContent = "Randomize List";
+    submitButton.style.marginTop = "5px"
 
     let saveRandomizedListButton = document.createElement("button");
     saveRandomizedListButton.setAttribute("id", "save-randomized-list-button");
     saveRandomizedListButton.textContent = "Save Randomized List";
+    saveRandomizedListButton.style.marginTop = "5px"
 
     document.querySelector("#randomizer-div").appendChild(submitButton)
     document.querySelector("#randomizer-div").appendChild(saveRandomizedListButton);
