@@ -6,7 +6,7 @@ let savedLists = [];
 
 const createOneByOneHeader = () => {
     let html = "<h3>Create Your List to Randomize</h3>";
-    html += "<div id='inputs-div'><span class='input-spans' id='one-by-one-span-1'><input id='input-1' type='text'><button class='add-input-button' id='plus-minus-button-1'>+</button></span><br></div>"
+    html += "<div id='inputs-div'><span class='input-spans' id='one-by-one-span-1'><input id='input-1' type='text' class='one-by-one-inputs'><button class='add-input-button' id='plus-minus-button-1'>+</button></span><br></div>"
     if(document.querySelector("#one-by-one-div") != null){
         inputStart = 1;
         howManyTimesSubmitHit = 0;
@@ -27,11 +27,13 @@ const createOneByOneHeader = () => {
 const createOneByOneRandomizeButton = () => {
     let submitButton = document.createElement("button");
     submitButton.setAttribute("id", "randomize-inputs-list-button");
+    submitButton.classList.add("site-button");
     submitButton.textContent = "Randomize List";
     submitButton.style.marginTop = "5px"
 
     let saveRandomizedListButton = document.createElement("button");
     saveRandomizedListButton.setAttribute("id", "save-randomized-list-button");
+    saveRandomizedListButton.classList.add("site-button");
     saveRandomizedListButton.textContent = "Save Randomized List";
     saveRandomizedListButton.style.marginTop = "5px"
 
@@ -55,7 +57,7 @@ const oneByOnePlusButtonClicked = () => {
         document.querySelector(`#plus-minus-button-${inputStart}`).innerHTML = "-"
         
         inputStart++
-        let html = "<input id='input-"+inputStart+"' type='text'><button class='add-input-button' id=plus-minus-button-"+inputStart+">+</button><br>"
+        let html = "<input id='input-"+inputStart+"' type='text' class='one-by-one-inputs'><button class='add-input-button' id=plus-minus-button-"+inputStart+">+</button><br>"
         let span = document.createElement("span")
         span.setAttribute("id", "one-by-one-span-" + inputStart);
         span.setAttribute("class", "input-spans")

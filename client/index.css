@@ -1,20 +1,69 @@
+#input-mode {
+    height: 50px;
+    width: 300px;
+    font-size: 20px;
+}
+
+.site-button {
+    height: 30px;
+    width: 250px;
+    font-size: 20px;
+    margin: 7px;
+}
+
+.one-by-one-inputs {
+    width: 225px;
+    height: 30px;
+    margin: 5px;
+}
+
+.add-input-button {
+    font-size: 15px;
+    margin: 3px;
+}
+
 /* For mobile phones: */
-/* [class*="col-"] {
-    width: 100%;
-  } */
-  
+[class*="col-"] {
+  width: 100%;
+}
+
 #froof-home-image {
     height: 300px;
 }
 
-/* https://css-tricks.com/snippets/css/media-queries-for-standard-devices/ */
-/* iphone 5 */
 @media only screen 
   and (min-device-width: 320px) 
   and (max-device-width: 568px)
   and (-webkit-min-device-pixel-ratio: 2) {
     #froof-home-image {
         height: 1000px;
+    }
+
+    #single-randomizer {
+        height: 500px;
+    }
+
+    #input-mode {
+        height: 50px;
+        width: 300px;
+        font-size: 20px;
+    }
+
+    .site-button {
+        height: 30px;
+        width: 250px;
+        font-size: 20px;
+        margin: 7px;
+    }
+
+    .one-by-one-inputs {
+        width: 225px;
+        height: 30px;
+    }
+    
+    .add-input-button {
+        font-size: 15px;
+        margin: 3px;
     }
 }
 

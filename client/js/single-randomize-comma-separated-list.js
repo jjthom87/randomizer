@@ -1,6 +1,6 @@
 const createCommaSeparatedHeader = () => {
     let html = "<h3>Input Your Comma Separated List to Randomize</h3>";
-    html += "<span><i>If an input contains a comma, please replace it with a '^' symbol</i></span><br><br>"
+    html += "<span style='font-size: 20px'><i>If an input contains a comma, please replace it with a ^ symbol</i></span><br><br>"
     html += "<textarea id='comma-separated-text-area' style='height: 150px;width: 400px;'></textarea>"
     const div = document.createElement('div');
     div.setAttribute("id", "comma-separated-text-area-div");
@@ -12,6 +12,7 @@ const createCommaSeparatedHeader = () => {
 const createCommaSeparatedRandomizeButton = () => {
     let submitButton = document.createElement("button");
     submitButton.setAttribute("id", "randomize-inputs-list-button-comma-separated");
+    submitButton.classList.add("site-button");
     submitButton.textContent = "Randomize List";
 
     // let saveRandomizedListButton = document.createElement("button");
